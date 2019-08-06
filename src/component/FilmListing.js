@@ -30,22 +30,20 @@ class FilmListing extends Component {
         this.state.filters === "all" ? showFilms = allFilms : showFilms = favesFilms
        
         return(
-            <div className="film-list">
+            <div className="film-list" >
              <h1 className="section-title">FILMS</h1>
-               <div className="film-list-filters">
-                  <div onClick={() => this.handleFilterClick('all')} className={`film-list-filter ${this.state.filters === 'all' ? 'is-active' : ''}`}>
-                  ALL
-                  
-                    <span className="section-count">{films.length}</span>
-                  </div>
-                  <div onClick={() => this.handleFilterClick('faves')} className={`film-list-filter ${this.state.filters === 'faves' ? 'is-active' : ''}`}>
-                     FAVES
+                 <div className="film-list-filters">
+                    <div onClick={() => this.handleFilterClick('all')} className={`film-list-filter ${this.state.filters === 'all' ? 'is-active' : ''}`}>
+                        ALL
+                     <span className="section-count">{films.length}</span>
+                     </div>
+                     <div onClick={() => this.handleFilterClick('faves')} className={`film-list-filter ${this.state.filters === 'faves' ? 'is-active' : ''}`}>
+                        FAVES
                       <span className="section-count">{faves.length}</span>
+                    </div>
                   </div>
+                    {showFilms}       
              </div>
-             {showFilms}
-                    
-            </div>
         );
     }
 }

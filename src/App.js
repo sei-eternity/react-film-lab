@@ -57,12 +57,12 @@ class App extends Component {
 
   render(){
   return (
-    <div className="App">
+    
       <div className="film-library">
         <FilmListing handleDetailsClick={this.handleDetailsClick} films={this.state.films} faves={this.state.faves} onFaveToggle={this.handleFaveToggle}/> 
         <FilmDetails film={this.state.current} /> 
       </div>
-    </div>
+    
   
   );
 }

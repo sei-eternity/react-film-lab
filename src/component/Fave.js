@@ -1,32 +1,23 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class Fave extends Component {
+function Fave(props){
 
 
-    constructor(props){
-        super(props);
-        this.state = {
-            
-        }
-    }
-
-    handleFaveClick = (e) => {
+   const handleFaveClick = (e) => {
         e.stopPropagation()
 
-        this.props.onFaveToggle()
+        props.onFaveToggle()
         console.log("handling Fave click!")
-        console.log(this.props.isFave)
+        console.log(props.isFave)
     }
-   
-    render() { 
-        const isFave = (this.props.isFave) ? 'remove_from_queue' : 'add_to_queue'
-        const message = this.props.isFave ? "remove_from_queue" : "add_to_queue"
+        const isFave = props.isFave ? 'remove_from_queue' : 'add_to_queue'
+        const message = props.isFave ? "remove_from_queue" : "add_to_queue"
         return ( 
-            <div  onClick={this.handleFaveClick} className={`film-row-fave ${isFave}`}  >
+            <div  onClick={handleFaveClick} className={`film-row-fave ${isFave}`}  >
                 <p className="material-icons">{message}</p>
             </div>
          );
-    }
+    
 }
  
 export default Fave;
