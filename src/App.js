@@ -15,11 +15,10 @@ class App extends Component {
       faves: [],
       current: {}
     }
-    this.handleFaveToggle = this.handleFaveToggle.bind(this);
-    this.handleDetailsClick = this.handleDetailsClick.bind(this);
+    
   }
 
-  handleFaveToggle(film){
+  handleFaveToggle = (film) => {
 
     const faves = [...this.state.faves];
     const filmIndex = faves.indexOf(film)
@@ -36,7 +35,7 @@ class App extends Component {
     console.log("handleFav Toggle called")
   }
 
-  handleDetailsClick(film){
+  handleDetailsClick = (film) => {
     
     const url = `https://api.themoviedb.org/3/movie/${film.id}?api_key=${TMDB.api_key}&append_to_response=videos,images&language=en`
     
