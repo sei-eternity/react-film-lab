@@ -6,25 +6,23 @@ class Fave extends Component {
     constructor(props){
         super(props);
         this.state = {
-            isFave: false
+            
         }
     }
 
-    handleClick(e){
+    handleFaveClick = (e) => {
         e.stopPropagation()
 
-        this.setState({
-            isFave: !this.state.isFave
-        })
+        this.props.onFaveToggle()
         console.log("handling Fave click!")
-        console.log(this.state.isFave)
+        console.log(this.props.isFave)
     }
    
     render() { 
-        const isFave = (this.state.isFave) ? 'remove_from_queue' : 'add_to_queue'
-        const message = this.state.isFave ? "remove_from_queue" : "add_to_queue"
+        const isFave = (this.props.isFave) ? 'remove_from_queue' : 'add_to_queue'
+        const message = this.props.isFave ? "remove_from_queue" : "add_to_queue"
         return ( 
-            <div  onClick={(e) => this.handleClick(e)} className={`film-row-fave ${isFave}`}  >
+            <div  onClick={this.handleFaveClick} className={`film-row-fave ${isFave}`}  >
                 <p className="material-icons">{message}</p>
             </div>
          );

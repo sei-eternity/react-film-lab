@@ -1,23 +1,50 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './App.css';
 import FilmListing from './component/FilmListing'
 import FilmDetails from './component/FilmDetails'
 import TMDB from './TMDB'
-function App() {
 
-  
+
+class App extends Component {
+
+  constructor(props){
+    super(props)
+    this.state = {
+      films: TMDB.films,
+      faves: [],
+      current: {}
+    }
+    this.handleFaveToggle = this.handleFaveToggle.bind(this);
+  }
+
+  handleFaveToggle(film){
+
+    const faves = [...this.state.faves];
+    const filmIndex = faves.indexOf(film)
+
+    if (filmIndex != -1){
+       faves.splice(filmIndex, 1);
+       console.log(`Removing ${film.title}`)
+    }else{
+      faves.push(film);
+      console.log(`Adding ${film.title}`)
+    }
+    this.setState({faves})
+
+    console.log("handleFav Toggle called")
+  }
+
+  render(){
   return (
-    <div className="film-library">
-      
-      <FilmListing films={TMDB} /> 
-      
-
-      
-      <FilmDetails films={TMDB} /> 
-      
+    <div className="App">
+      <div className="film-library">
+        <FilmListing films={this.state.films} faves={this.state.faves} onFaveToggle={this.handleFaveToggle}/> 
+        <FilmDetails film={this.state.current} /> 
+      </div>
     </div>
   
   );
+}
 }
 
 export default App;

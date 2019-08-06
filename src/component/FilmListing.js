@@ -8,6 +8,7 @@ class FilmListing extends Component {
         this.state = {
             filters: "all"
         }
+        
     }
 
     
@@ -22,9 +23,12 @@ class FilmListing extends Component {
     }
 
     render(){
-        const allFilms = this.props.films
-        const filmsTitle = allFilms.films.map((film) => <FilmRow key={film.id} film={film} />)
-        const isActiv = this.state.filters === "all" && "is-active"
+        const { films, faves} = this.props;
+        let showFilms = [];
+        const allFilms = films.map((film) => <FilmRow key={film.id} film={film} isFave={faves.includes(film)} onFaveToggle={() => this.props.onFaveToggle(film)} />)
+        const favesFilms = faves.map((film) => <FilmRow key={film.id} film={film} isFave={faves.includes(film)} onFaveToggle={() => this.props.onFaveToggle(film)} />)
+        this.state.filters == "all" ? showFilms = allFilms : showFilms = favesFilms
+       
         return(
             <div className="film-list">
              <h1 className="section-title">FILMS</h1>
@@ -32,15 +36,16 @@ class FilmListing extends Component {
                   <div onClick={() => this.handleFilterClick('all')} className={`film-list-filter ${this.state.filters === 'all' ? 'is-active' : ''}`}>
                   ALL
                   
-                    <span className="section-count">{allFilms.films.length}</span>
+                    <span className="section-count">{films.length}</span>
                   </div>
                   <div onClick={() => this.handleFilterClick('faves')} className={`film-list-filter ${this.state.filters === 'faves' ? 'is-active' : ''}`}>
                      FAVES
-                      <span className="section-count">0</span>
+                      <span className="section-count">{faves.length}</span>
                   </div>
              </div>
-                    {filmsTitle}
-            {console.log(allFilms.films)}
+             {showFilms}
+                    
+            {console.log(films)}
             </div>
         );
     }
