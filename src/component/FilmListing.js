@@ -25,8 +25,8 @@ class FilmListing extends Component {
     render(){
         const { films, faves} = this.props;
         let showFilms = [];
-        const allFilms = films.map((film) => <FilmRow key={film.id} film={film} isFave={faves.includes(film)} onFaveToggle={() => this.props.onFaveToggle(film)} />)
-        const favesFilms = faves.map((film) => <FilmRow key={film.id} film={film} isFave={faves.includes(film)} onFaveToggle={() => this.props.onFaveToggle(film)} />)
+        const allFilms = films.map((film) => <FilmRow key={film.id} film={film} isFave={faves.includes(film)} onFaveToggle={() => this.props.onFaveToggle(film)}  handleDetailsClick ={this.props.handleDetailsClick}/>)
+        const favesFilms = faves.map((film) => <FilmRow key={film.id} film={film} isFave={faves.includes(film)} onFaveToggle={() => this.props.onFaveToggle(film)} handleDetailsClick ={this.props.handleDetailsClick}/>)
         this.state.filters == "all" ? showFilms = allFilms : showFilms = favesFilms
        
         return(
