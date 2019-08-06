@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
-import FilmListing from './component/FilmListing'
-import FilmDetails from './component/FilmDetails'
-import TMDB from './TMDB'
+import FilmListing from './component/FilmListing';
+import FilmDetails from './component/FilmDetails';
+import TMDB from './TMDB';
+import axios from "axios";
 
 
 class App extends Component {
@@ -23,7 +24,7 @@ class App extends Component {
     const faves = [...this.state.faves];
     const filmIndex = faves.indexOf(film)
 
-    if (filmIndex != -1){
+    if (filmIndex !== -1){
        faves.splice(filmIndex, 1);
        console.log(`Removing ${film.title}`)
     }else{
@@ -37,11 +38,20 @@ class App extends Component {
 
   handleDetailsClick(film){
     
+    const url = `https://api.themoviedb.org/3/movie/${film.id}?api_key=${TMDB.api_key}&append_to_response=videos,images&language=en`
     
-    this.setState({
-      current:  film
+    axios({
+      method: 'GET',
+      url: url
+    }).then(response => {
+      console.log(response.data) 
+      this.setState({ current: response.data })
+      console.log(`Fetching details for ${this.state.current}`)
     })
-    console.log(`Fetching details for ${this.state.current.title}`)
+    .catch(e => {
+      console.log(`eeeeeeeeeee ${e}`)
+    });
+    
     
 }
 
