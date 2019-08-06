@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import FilmRow from './FilmRow';
 
+
 class FilmListing extends Component {
 
     constructor(props){
@@ -42,6 +43,7 @@ class FilmListing extends Component {
                       <span className="section-count">{faves.length}</span>
                     </div>
                   </div>
+                  
                     {showFilms}       
              </div>
         );
