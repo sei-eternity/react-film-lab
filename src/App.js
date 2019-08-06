@@ -14,8 +14,7 @@ class App extends Component {
       films: TMDB.films,
       faves: [],
       current: {}
-    }
-    
+    } 
   }
 
   handleFaveToggle = (film) => {
@@ -25,14 +24,12 @@ class App extends Component {
 
     if (filmIndex !== -1){
        faves.splice(filmIndex, 1);
-       console.log(`Removing ${film.title}`)
+       console.log(`Removing ${film.title} From Favors`)
     }else{
       faves.push(film);
-      console.log(`Adding ${film.title}`)
+      console.log(`Adding ${film.title} To Favors`)
     }
     this.setState({faves})
-
-    console.log("handleFav Toggle called")
   }
 
   handleDetailsClick = (film) => {
@@ -43,28 +40,21 @@ class App extends Component {
       method: 'GET',
       url: url
     }).then(response => {
-      console.log(response.data) 
       this.setState({ current: response.data })
-      console.log(`Fetching details for ${this.state.current}`)
     })
     .catch(e => {
-      console.log(`eeeeeeeeeee ${e}`)
-    });
-    
-    
+      console.log(`There is an Error With axios ${e}`)
+    });  
 }
 
   render(){
-  return (
-    
-      <div className="film-library">
-        <FilmListing handleDetailsClick={this.handleDetailsClick} films={this.state.films} faves={this.state.faves} onFaveToggle={this.handleFaveToggle}/> 
-        <FilmDetails film={this.state.current} /> 
-      </div>
-    
-  
-  );
-}
+      return (
+          <div className="film-library">
+              <FilmListing handleDetailsClick={this.handleDetailsClick} films={this.state.films} faves={this.state.faves} onFaveToggle={this.handleFaveToggle}/> 
+              <FilmDetails film={this.state.current} /> 
+          </div>
+      );
+  }
 }
 
 export default App;
